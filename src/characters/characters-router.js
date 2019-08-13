@@ -1,41 +1,55 @@
 const express = require('express');
-const charactersService = require('./character-service')
-const backgroundStore = require('./stores/backgroundStore');
-const raceStore = require('./stores/raceStore');
-const classStore = require('./stores/classStore');
+const charactersService = require('./characters-service');
 const { requireAuth } = require('../middleware/jwt-auth');
 
 const charactersRouter = express.Router();
 const jsonBodyParser = express.json();
 
-charactersRouter
-  .route('/:characterId')
-  .get(requireAuth, (req, res) => {
-    res.json(charactersService.getCharacter(req.params.characterId))
-  });
+charactersRouter.route('/:characterId').get(requireAuth, (req, res) => {
+  charactersService
+    .getCharacterById(req.app.get('db'), req.params.characterId)
+    .then((character) => {
+      return res.json(character.character);
+    });
+});
 
 charactersRouter
   .route('/:characterId/races')
-  .patch((requireAuth, jsonBodyParser, (req, res, next) => {
+  .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { race } = req.body;
     const { characterId } = req.params;
-    charactersService.updateRace(req.app.get('db'), characterId, race)
-    .then(character => {
-      res
-        .status(200)
-        .json(charactersService.serializeCharacter(character))
-    })
-    .catch(next)
-  }));
+    charactersService
+      .updateRace(req.app.get('db'), characterId, race)
+      .then((character) => {
+        return res.json(character.character);
+      })
+      .catch(next);
+  });
 
 charactersRouter
   .route('/:characterId/classes')
-  .get((req, res) => {
-    res.json(classStore);
+  .patch(requireAuth, jsonBodyParser, (req, res, next) => {
+    const { newClass } = req.body;
+    const { characterId } = req.params;
+    charactersService
+      .updateClass(req.app.get('db'), characterId, newClass)
+      .then((character) => {
+        return res.json(character.character);
+      })
+      .catch(next);
   });
-  
- charactersRouter
+
+charactersRouter
   .route('/:characterId/backgrounds')
-  .get((req, res) => {
-    res.json(backgroundStore);
-  })
+  .patch(requireAuth, jsonBodyParser, (req, res, next) => {
+    const { background } = req.body;
+    const { characterId } = req.params;
+    charactersService
+      .updateBackground(req.app.get('db'), characterId, background)
+      .then((character) => {
+        return res.json(character.character);
+      })
+      .catch(next);
+  });
+
+module.exports = charactersRouter;

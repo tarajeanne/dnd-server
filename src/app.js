@@ -7,6 +7,9 @@ const { NODE_ENV } = require('./config');
 const charactersRouter = require('./characters/characters-router');
 const usersRouter = require('./users/users-router');
 const authRouter = require('./auth/auth-router');
+const backgroundStore = require('./stores/backgroundStore');
+const raceStore = require('./stores/raceStore');
+const classStore = require('./stores/classStore');
 
 const app = express();
 
@@ -22,7 +25,13 @@ app.use('/api/characters', charactersRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 
-app.get((req, res) => {
+app.get('/classes', (req, res) => {
+  res.json(classStore);
+})
+app.get('/races', (req, res) => {
+  res.json(classStore);
+})
+app.get('/backgrounds', (req, res) => {
   res.json(classStore);
 })
 
