@@ -5,7 +5,7 @@ const charactersService = require('../characters/characters-service');
 
 const UsersService = {
   hasUserWithUserName(db, username) {
-    return db('thingful_users')
+    return db('users')
       .where({ username })
       .first()
       .then((user) => !!user);
@@ -14,7 +14,7 @@ const UsersService = {
   insertUser(db, newUser) {
     return db
       .insert(newUser)
-      .into('thingful_users')
+      .into('users')
       .returning('*')
       .then(([user]) => user);
   },
