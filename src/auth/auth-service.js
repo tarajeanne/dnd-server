@@ -27,6 +27,10 @@ const AuthService = {
     });
   },
 
+  parseJwt(token) {
+    return jwt.decode(token);
+  },
+
   parseBasicToken(token) {
     return Buffer.from(token, 'base64')
       .toString()

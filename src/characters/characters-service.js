@@ -2,15 +2,9 @@ const xss = require('xss');
 const raceStore = require('../stores/raceStore');
 const classStore = require('../stores/classStore');
 const backgroundStore = require('../stores/backgroundStore');
+const { armorStore } = require('../stores/equipmentStore');
 
 const charactersService = {
-  getCharactersForUser(db, userId) {
-    return db
-      .from('user_character')
-      .select('user_character.character_id')
-      .where('user_character.user_id', userId);
-  },
-
   getCharacterById(db, id) {
     return db
       .from('characters')
@@ -22,187 +16,48 @@ const charactersService = {
       });
   },
 
-  createCharacter(db) {
+  deleteCharacter(db, id) {
     return db
-      .insert({
-        character: JSON.stringify({
-          name: '',
-          race: '',
-          class: '',
-          physical_desc: '',
-          other_desc: '',
-          background: '',
-          alignment: '',
-          size: '',
-          speed: 0,
-          languages: [
-            {
-              name: 'Common',
-              variable: false,
-              depends_on: null
-            }
-          ],
-          asi: [],
-          weap_prof: [],
-          tool_prof: [],
-          save_prof: [],
-          check_prof: [],
-          armor_prof: [],
-          skills: {},
-          features: {},
-          prof_bonus: 2,
-          hitDice: '',
-          hp: 0,
-          abilities: {
-            constitution: {
-              base: 0,
-              total: 0,
-              mod: 0
-            },
-            strength: {
-              base: 0,
-              total: 0,
-              mod: 0
-            },
-            dexterity: {
-              base: 0,
-              total: 0,
-              mod: 0
-            },
-            charisma: {
-              base: 0,
-              total: 0,
-              mod: 0
-            },
-            intelligence: {
-              base: 0,
-              total: 0,
-              mod: 0
-            },
-            wisdom: {
-              base: 0,
-              total: 0,
-              mod: 0
-            }
-          },
-          ability_checks: {
-            acrobatics: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            'animal handling': {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            arcana: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            athletics: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            deception: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            history: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            insight: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            intimidation: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            investigation: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            medicine: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            nature: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            perception: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            performance: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            persuasion: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            religion: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            'sleight of hand': {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            stealth: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            },
-            survival: {
-              mod: 0,
-              prof: 0,
-              total: 0
-            }
-          },
-          equipment: [],
-          spells_known: [],
-          spell_slots: [],
-          spells_memorized: []
-        })
-      })
-      .into('characters')
-      .returning('*')
-      .then(([character]) => character)
-      .then((character) =>
-        charactersService.getCharacterById(db, character.id)
-      );
+      .from('characters')
+      .where('characters.id', id)
+      .del()
+      .then((res) => res);
   },
 
-  updateName(db, id, name) {
-    let newChar;
-    charactersService.getCharacterById(db, id).then((character) => {
-      newchar = { ...character };
+  updateName(db, id, newName) {
+    return charactersService.getCharacterById(db, id).then((character) => {
+      let newChar = { ...character.character };
+      newChar.name = newName;
+
+      return db('characters')
+        .where({ id: id })
+        .update({
+          character: JSON.stringify(newChar)
+        })
+        .returning('*')
+        .then(([character]) => {
+          return character;
+        })
+        .then(charactersService.getCharacterById(db, character.id));
     });
-    newChar.name = name;
-    return db('characters')
-      .where('id', newChar.id)
-      .update({
-        character: newchar
-      })
-      .returning('*');
+  },
+
+  updateAlignment(db, id, newData) {
+    return charactersService.getCharacterById(db, id).then((character) => {
+      let newChar = { ...character.character };
+      newChar.alignment = newData;
+
+      return db('characters')
+        .where({ id: id })
+        .update({
+          character: JSON.stringify(newChar)
+        })
+        .returning('*')
+        .then(([character]) => {
+          return character;
+        })
+        .then(charactersService.getCharacterById(db, character.id));
+    });
   },
 
   updateRace(db, id, newRace) {
@@ -210,14 +65,22 @@ const charactersService = {
       let newChar = { ...character.character };
       newChar.race = newRace;
 
-      const raceData = raceStore.find(race => race.name.toLowerCase() === newRace.toLowerCase())
-      const staticAttributes = ['size', 'speed', 'traits'];
+      const raceData = raceStore.find(
+        (race) => race.name.toLowerCase() === newRace.toLowerCase()
+      );
+      const staticAttributes = ['size', 'speed'];
 
       staticAttributes.forEach((att) => {
         newChar[att] = raceData[att];
       });
 
-      const variableAttributes = ['asi', 'languages', 'weap_prof', 'tool_prof'];
+      const variableAttributes = [
+        'asi',
+        'languages',
+        'weap_prof',
+        'other_prof',
+        'skills_and_features'
+      ];
 
       variableAttributes.forEach((att) => {
         newChar[att] = newChar[att].filter((i) => i.depends_on !== 'race');
@@ -241,19 +104,16 @@ const charactersService = {
   updateClass(db, id, newClass) {
     return charactersService.getCharacterById(db, id).then((character) => {
       let newChar = { ...character.character };
-      newChar.newClass = newClass;
+      newChar.class = newClass;
 
-      console.log(newClass);
-
-      const classData = classStore.find(i => i.name.toLowerCase() === newClass.toLowerCase());
-      console.log(classData);
+      const classData = classStore.find(
+        (i) => i.name.toLowerCase() === newClass.toLowerCase()
+      );
 
       const staticAttributes = [
-        'skills',
+        'armor_prof',
         'hit_dice',
         'spell_slots',
-        'spells_known',
-        'num_spells_known',
         'save_prof'
       ];
 
@@ -262,13 +122,16 @@ const charactersService = {
       });
 
       const variableAttributes = [
-        'armor_prof',
+        'skills_and_features',
         'weap_prof',
         'tool_prof',
         'check_prof',
-        'equipment'
+        'equipment',
+        'weapons',
+        'armor'
       ];
       variableAttributes.forEach((att) => {
+        console.log(att);
         newChar[att] = newChar[att].filter((i) => i.depends_on !== 'class');
         if (classData[att]) {
           newChar[att].push(...classData[att]);
@@ -291,11 +154,17 @@ const charactersService = {
     return charactersService.getCharacterById(db, id).then((character) => {
       let newChar = { ...character.character };
       newChar.background = newBackground;
-      console.log(newBackground);
 
-      const backgroundData = backgroundStore.find(background => background.name.toLowerCase() === newBackground.toLowerCase());
-      newChar.feature = backgroundData.feature;
-      const variableAttributes = ['check_prof', 'languages', 'equipment'];
+      const backgroundData = backgroundStore.find(
+        (background) =>
+          background.name.toLowerCase() === newBackground.toLowerCase()
+      );
+      const variableAttributes = [
+        'check_prof',
+        'languages',
+        'equipment',
+        'skills_and_features'
+      ];
       variableAttributes.forEach((att) => {
         newChar[att] = newChar[att].filter(
           (i) => i.depends_on !== 'background'
@@ -304,6 +173,63 @@ const charactersService = {
           newChar[att].push(...backgroundData[att]);
         }
       });
+      return db('characters')
+        .where('id', id)
+        .update({
+          character: JSON.stringify(newChar)
+        })
+        .returning('*')
+        .then(([character]) => {
+          return character;
+        })
+        .then(charactersService.getCharacterById(db, character.id));
+    });
+  },
+
+  updateWeapon(db, id, index, name) {
+    return charactersService.getCharacterById(db, id).then((character) => {
+      let newChar = { ...character.character };
+      newChar.weapons[index].name = name;
+      return db('characters')
+        .where('id', id)
+        .update({
+          character: JSON.stringify(newChar)
+        })
+        .returning('*')
+        .then(([character]) => {
+          return character;
+        })
+        .then(charactersService.getCharacterById(db, character.id));
+    });
+  },
+
+  updateEquipment(db, id, index, name) {
+    console.log('updating equipment!!');
+    return charactersService.getCharacterById(db, id).then((character) => {
+      let newChar = { ...character.character };
+      newChar.equipment[index].name = name;
+      console.log(newChar.equipment[index].name);
+      return db('characters')
+        .where('id', id)
+        .update({
+          character: JSON.stringify(newChar)
+        })
+        .returning('*')
+        .then(([character]) => {
+          return character;
+        })
+        .then(charactersService.getCharacterById(db, character.id));
+    });
+  },
+
+  updateArmor(db, id, index, name) {
+    return charactersService.getCharacterById(db, id).then((character) => {
+      let newChar = { ...character.character };
+      newChar.equipment[index].name = name;
+      newChar.other_prof = newChar.other_prof.filter(
+        (prof) => prof.depends_on !== 'armor'
+      );
+      charactersService.updateStats(newChar);
       return db('characters')
         .where('id', id)
         .update({
@@ -352,7 +278,6 @@ const charactersService = {
         })
         .then(charactersService.getCharacterById(db, character.id));
     });
-   
   },
 
   updateCheckProf(db, id, index, name) {
@@ -363,7 +288,7 @@ const charactersService = {
       return db('characters')
         .where('id', id)
         .update({
-          character: JSON.stringify(newchar)
+          character: JSON.stringify(newChar)
         })
         .returning('*')
         .then(([character]) => {
@@ -371,7 +296,6 @@ const charactersService = {
         })
         .then(charactersService.getCharacterById(db, character.id));
     });
-  
   },
 
   updateStats(character) {
@@ -433,6 +357,26 @@ const charactersService = {
         character.ability_checks[prof.name].prof = Math.floor(
           character.prof_bonus * (prof.coef || 1)
         );
+      }
+    });
+
+    character.armor.forEach((armor) => {
+      character.ac = armor.ac_base;
+      if (armor.ac_mod) {
+        if (armor.ac_mod === 'max2') {
+          if (character.abilities.dexterity.mod > 2) {
+            character.ac = character.ac + 2;
+          } else {
+            character.ac = character.ac + character.abilities.dexterity.mod;
+          }
+        }
+      }
+      if (armor.stealth) {
+        character.other_prof.push({
+          name: 'You have disadvantage on stealth due to heavy armor.',
+          variable: false,
+          depends_on: 'armor'
+        });
       }
     });
 

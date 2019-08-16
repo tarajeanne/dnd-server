@@ -2,13 +2,24 @@ const classStore = [
   {
     id: 1,
     name: 'Barbarian',
-    desc: 'ANGRY FIGHT',
-    skills: {
-      Rage:
-        'In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren’t wearing heavy armor: You have advantage on Strength checks and Strength saving throws. When you make a melee weapon attack using Strength, you gain a bonus to the damage roll that increases as you gain levels as a barbarian, as shown in the Rage Damage column of the Barbarian table. You have resistance to bludgeoning, piercing, and slashing damage. If you are able to cast spells, you can’t cast them or concentrate on them while raging. Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then. You can also end your rage on your turn as a bonus action. Once you have raged the number of times shown for your barbarian level in the Rages column of the Barbarian table, you must finish a long rest before you can rage again.',
-      'Unarmored Defense':
-        'While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier. You can use a shield and still gain this benefit.'
-    },
+    desc: 'Furious warriors who charge into battle and win with brute force.',
+    other_prof: {},
+    skills_and_features: [
+      {
+        name: 'Rage',
+        variable: false,
+        depends_on: 'class',
+        desc:
+          'Twice per long rest, you can enter a rage as a bonus action and gain the following benefits if you aren’t wearing heavy armor: You have advantage on Strength checks and Strength saving throws. When you make a melee weapon attack using Strength, add 2 to damage. You have resistance to bludgeoning, piercing, and slashing damage. If you are able to cast spells, you can’t cast them or concentrate on them while raging. Your rage lasts for 1 minute. It ends early if you are knocked unconscious or if your turn ends and you haven’t attacked a hostile creature since your last turn or taken damage since then.'
+      },
+      {
+        name: 'Unarmored Defense',
+        depends_on: 'class',
+        variable: false,
+        desc:
+          'While you are not wearing any armor, your Armor Class equals 10 + your Dexterity modifier. You can use a shield and still gain this benefit.'
+      }
+    ],
     level_ups: {
       2: {
         skills: {
@@ -153,35 +164,68 @@ const classStore = [
     hit_dice: '1d12',
     armor_prof: [
       {
-        name: 'Light armor',
+        armorList: 'light armor',
         depends_on: 'class',
         variable: false
       },
       {
-        name: 'Medium armor',
+        armorList: 'medium armor',
         depends_on: 'class',
         variable: false
       },
       {
-        name: 'shields',
+        armorList: 'shields',
         depends_on: 'class',
         variable: false
       }
     ],
-    weap_prof: [
+    weap_prof: [{
+      list: [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      depends_on: 'class',
+      variable: false
+    }],
+    tool_prof: [],
+    save_prof: [
       {
-        name: 'Simple weapons',
+        name: 'strength',
         depends_on: 'class',
         variable: false
       },
       {
-        name: 'Martial weapons',
+        name: 'constitution',
         depends_on: 'class',
         variable: false
       }
     ],
-    tool_prof: null,
-    save_prof: 'strength, constitution',
     spell_slots: null,
     num_spells_known: null,
     spells_known: null,
@@ -216,28 +260,50 @@ const classStore = [
         norepeat: true
       }
     ],
-    equipment: [
+    weapons: [
       {
         name: '',
         variable: true,
         depends_on: 'class',
-        options: ['greataxe', 'martial melee weapons']
+        options: [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ]
       },
       {
         name: '',
         variable: true,
         depends_on: 'class',
-        options: ['two handaxes', 'simple weapon']
-      },
-      {
-        name: 'explorer\'s pack',
-        quantity: 1,
-        depends_on: 'class',
-        variable: false
+        options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       },
       {
         name: 'javelin',
         quantity: 4,
+        depends_on: 'class',
+        variable: false
+      }
+    ],
+    armor: [],
+    equipment: [
+      {
+        name: 'explorer\'s pack',
+        quantity: 1,
         depends_on: 'class',
         variable: false
       }
@@ -247,23 +313,42 @@ const classStore = [
     id: 2,
     name: 'Bard',
     desc:
-      ' Spellcasting. You have learned to untangle and reshape the fabric of reality in harmony with your wishes and music. Your spells are part of your vast repertoire, magic that you can tune to different situations.',
-    skills: {
-      'Ritual Casting':
-        'Ritual Casting. You can cast any bard spell you know as a ritual if that spell has the ritual tag.',
-      'Spellcasting Focus':
-        'You can use a musical instrument (see chapter 5, “Equip-ment”) as a spellcasting focus for your bard spells',
-      'Leveling up spells':
-        'When you gain a level in this class, you can choose on of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.',
-      'Bardic Inspiration':
-        'You can inspire others through stirring words or music. To do so, you use a bonus action on your turn to choose one creature other than yourself within 60 feet of you who can hear you. That creature gains one Bardic Inspiration die, a d6. Once within the next 10 minutes, the creature can roll the die and add the number rolled to one ability check, attack roll, or saving throw it makes. The creature can wait until after it rolls the d20 before deciding to use the Bardic Inspiration die, but must decide before the GM says whether the roll succeeds or fails. Once the Bardic Inspiration die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. You can use this feature a number of times equal to your Charisma modifier (a minimum of once). You regain any expended uses when you finish a long rest.'
-    },
+      'Storytellers whose music casts incredible magic, and who would rather rely on charm than force.',
+    skills_and_features: [
+      {
+        name: 'Ritual Casting',
+        depends_on: 'class',
+        variable: false,
+        desc:
+          'Ritual Casting. You can cast any bard spell you know as a ritual if that spell has the ritual tag.'
+      },
+      {
+        name: 'Spellcasting Focus',
+        depends_on: 'class',
+        variable: false,
+        desc:
+          'You can use a musical instrument as a spellcasting focus for your bard spells'
+      },
+      {
+        name: 'Bardic Inspiration',
+        depends_on: 'class',
+        variable: false,
+        desc:
+          'You can use a bonus action on your turn to choose another creature within 60 feet. That creature gains a d6 that they can roll and add to one ability check, attack roll, or saving throw they make in the next 10 minutes. The creature can wait until after it rolls the d20 before deciding to use the die, but must decide before the GM says whether the roll succeeds or fails. Once the die is rolled, it is lost. A creature can have only one Bardic Inspiration die at a time. You can use this feature a number of times equal to your Charisma modifier (a minimum of once) until a long rest.'
+      }
+    ],
     level_ups: {
       2: {
-        check_prof: {
-          coef: 0.5,
-          skill: ['all']
-        },
+        filler:
+          'Leveling up spells When you gain a level in this class, you can choose on of the bard spells you know and replace it with another spell from the bard spell list, which also must be of a level for which you have spell slots.',
+        check_prof: [
+          {
+            coef: 0.5,
+            name: 'animal handling',
+            variable: false,
+            depends_on: ['class', 2]
+          }
+        ],
         skills: {
           'Song of Rest':
             'You can use soothing music or oration to help revitalize your wounded allies during a short rest. If you or any friendly creatures who can hear your performance regain hit points at the end of the short rest by spending one or more Hit Dice, each of those creatures regains an extra 1d6 hit points.'
@@ -410,18 +495,44 @@ const classStore = [
     hit_dice: '1d8',
     spell_mod: 'proficiency bonus + charisma',
     spell_save_dc: '8 + proficiency bonus + charisma modifier',
-    armor_prof: 'Light armor',
-    weap_prof:
-      'Simple weapons, hand crossbows, longswords, rapiers, shortswords',
-    tool_prof: 'Three musical instruments of your choice',
-    save_prof: 'Dexterity, Charisma',
+    armor_prof: [
+      {
+        armorList: 'light armor',
+        depends_on: 'class',
+        variable: false
+      }
+    ],
+    weap_prof: [{
+      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 22, 26, 28, 34],
+      depends_on: 'class',
+      variable: false
+    }],
+    tool_prof: [
+      {
+        name: 'Three musical instruments of your choice',
+        depends_on: 'class',
+        variable: false
+      }
+    ],
+    save_prof: [
+      {
+        name: 'dexterity',
+        depends_on: 'class',
+        variable: false
+      },
+      {
+        name: 'charisma',
+        depends_on: 'class',
+        variable: false
+      }
+    ],
     check_prof: [
       {
         name: '',
         variable: true,
         depends_on: 'class',
         options: [
-          'animal Hhndling',
+          'animal handling',
           'athletics',
           'intimidation',
           'nature',
@@ -447,7 +558,7 @@ const classStore = [
         variable: true,
         depends_on: 'class',
         options: [
-          'animal Hhndling',
+          'animal handling',
           'athletics',
           'intimidation',
           'nature',
@@ -473,7 +584,7 @@ const classStore = [
         variable: true,
         depends_on: 'class',
         options: [
-          'animal Hhndling',
+          'animal handling',
           'athletics',
           'intimidation',
           'nature',
@@ -495,58 +606,178 @@ const classStore = [
         norepeat: true
       }
     ],
-    spells_known: {
-      bard: 4
-    },
-    spells_memorized: null,
+    spells_known: [
+      {
+        type: 'bard',
+        max_level: 1,
+        quantity: 4
+      }
+    ],
+    spells_prepared: null,
     spell_slots: {
       1: 2
     },
-    equipment_choice: [
+    weapons: [
       {
-        choose: 1,
-        from: ['rapier', 'longsword', 'simple melee weapon']
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: [22, 26, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       },
       {
-        choose: 1,
-        from: ['diplomat\'s pack', 'entertainer\'s pack']
+        name: 'dagger',
+        variable: false,
+        quantity: 1,
+        depends_on: 'class'
       }
     ],
-    other_equipment: {
-      'Any musical instrument': 1,
-      'Leather armor': 1,
-      Dagger: 1
-    },
-
+    armor: [
+      {
+        name: 'leather armor',
+        variable: false,
+        quantity: 1,
+        depends_on: 'class'
+      }
+    ],
+    equipment: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: ['diplomat\'s pack', 'entertainer\'s pack']
+      },
+      {
+        name: 'any musical instrument',
+        variable: false,
+        quantity: 1,
+        depends_on: 'class'
+      }
+    ],
     spellcasting_ability: 'charisma'
+  },
+  {
+    id: 3,
+    name: 'Cleric',
+    desc:
+      'Holy warriors who use the power of the gods to heal and empower their teammates, and also kick ass.',
+    level_ups: {
+      'Your choice grants you domain spells and other features when you choose it at 1st level. It also grants you additional ways to use Channel Divinity when you gain that feature at 2nd level, and additional benefits at 6th, 8th, and 17th levels.  Domain Spells. Each domain has a list of spells—its domain spells— that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn’t count against the number of spells you can prepare each day. If you have a domain spell that doesn’t appear on the cleric spell list, the spell is nonetheless a cleric spell for you.  Channel Divinity. At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description. When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again. Some Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC. Beginning at 6th level, you can use your Channel. Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.  Channel Divinity: Turn Undead. As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage. A turned creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action.  Ability Score Improvement. When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.  Destroy Undead. Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold, as shown in the Destroy Undead table. **Destroy Undead (table)**. | Cleric Level | Destroys Undead of CR. | \n|--------------|--------------------------| \n| 5th          | 1/2 or lower             | \n| 8th          | 1 or lower               | \n| 11th         | 2 or lower               | \n| 14th         | 3 or lower               | \n| 17th         | 4 or lower               |.  Divine Intervention. Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great. Imploring your deity’s aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes. The GM chooses the nature of the intervention; the effect of any cleric spell or cleric domain spell would be appropriate. If your deity intervenes, you can’t use this feature again for 7 days. Otherwise, you can use it again after you finish a long rest. At 20th level, your call for intervention succeeds automatically, no roll required.,     Divine Domain. Choose one domain related to your deity: Knowledge, Life, Light, Nature, Tempest, Trickery, or War. Each domain is detailed at the end of the class description, and each one provides examples of gods associated with it.': 1
+    },
+    skills_and_features: [
+      {
+        name: 'ritual casting',
+        desc:
+          'You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.',
+        depends_on: 'class',
+        variable: false
+      }
+    ],
+    hit_dice: '1d8',
+    spells_known: [
+      {
+        name: '',
+        type: 'cleric',
+        max_level: 0
+      },
+      {
+        name: '',
+        type: 'cleric',
+        max_level: 0
+      },
+      {
+        name: '',
+        type: 'cleric',
+        max_level: 0
+      }
+    ],
+    next_steps:
+      'As a cleric, your character knows all the cleric spells in existence, but can only have a few ready at a time. That means that every time your character gets a long rest, they can prepare spells to use until their next long rest. The number of spells you can prepare is equal to your level plus your wisdom modifier (If your level is 3, and your wisdom is 16 (modifer = +3), then you get 6 spells). You can only select spells at a level less than or equal to the highest level of your spell slots (this is not equal to your character level). Choose your spells from the official list here: https://www.dndbeyond.com/spells/class/cleric. Additionally, you should choose a deity to worship, and a holy symbol through which you cast your spells. The deity you choose to worship should be related to the domain you chose. Check out the list here: https://www.dndbeyond.com/sources/basic-rules/appendix-b-gods-of-the-multiverse.',
+    spell_slots: {
+      0: 3,
+      1: 2
+    },
+    spell_save_dc: '8+profiiciency bonus + wisdom modifier',
+    spell_attack_mod: 'proficiency bonus + wisdom',
+    armor_prof: 'Light armor, medium armor, shields',
+    weap_prof: [{
+      list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+      depends_on: 'class',
+      variable: false
+    }],
+    tool_prof: [],
+    save_prof: [
+      { name: 'wisdom', variable: false, depends_on: 'class' },
+      { name: 'charisma', variable: false, depends_on: 'class' }
+    ],
+    check_prof: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: ['history', 'religion', 'insight', 'medicine', 'persuasion'],
+        norepeat: true
+      },
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: ['history', 'religion', 'insight', 'medicine', 'persuasion'],
+        norepeat: true
+      }
+    ],
+    weapons: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: [7, 31]
+      },
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+      }
+    ],
+    armor: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: [2, 6, 10]
+      },
+      {
+        name: 'shield',
+        variable: false,
+        depends_on: 'class'
+      }
+    ],
+    equipment: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'class',
+        options: ['priest\'s pack', 'explorer\'s pack']
+      },
+      {
+        name: 'Holy symbol',
+        variable: false,
+        depends_on: 'class'
+      }
+    ]
+    // table:
+    //   '| Level | Proficiency Bonus | Features                                                                | Cantrips Known | 1st | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | \n|-------|-------------------|-------------------------------------------------------------------------|----------------|-----|-----|-----|-----|-----|-----|-----|-----|-----| \n| 1st   | +2                | Spellcasting, Divine Domain                                             | 3              | 2   | -   | -   | -   | -   | -   | -   | -   | -   | \n| 2nd   | +2                | Channel Divinity (1/rest), Divine Domain Feature                        | 3              | 3   | -   | -   | -   | -   | -   | -   | -   | -   | \n| 3rd   | +2                | -                                                                       | 3              | 4   | 2   | -   | -   | -   | -   | -   | -   | -   | \n| 4th   | +2                | Ability Score Improvement                                               | 4              | 4   | 3   | -   | -   | -   | -   | -   | -   | -   | \n| 5th   | +3                | Destroy Undead (CR 1/2)                                                 | 4              | 4   | 3   | 2   | -   | -   | -   | -   | -   | -   | \n| 6th   | +3                | Channel Divinity (2/rest), Divine Domain Feature                        | 4              | 4   | 3   | 3   | -   | -   | -   | -   | -   | -   | \n| 7th   | +3                | -                                                                       | 4              | 4   | 3   | 3   | 1   | -   | -   | -   | -   | -   | \n| 8th   | +3                | Ability Score Improvement, Destroy Undead (CR 1), Divine Domain Feature | 4              | 4   | 3   | 3   | 2   | -   | -   | -   | -   | -   | \n| 9th   | +4                | -                                                                       | 4              | 4   | 3   | 3   | 3   | 1   | -   | -   | -   | -   | \n| 10th  | +4                | Divine Intervention                                                     | 5              | 4   | 3   | 3   | 3   | 2   | -   | -   | -   | -   | \n| 11th  | +4                | Destroy Undead (CR 2)                                                   | 5              | 4   | 3   | 3   | 3   | 2   | 1   | -   | -   | -   | \n| 12th  | +4                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 2   | 1   | -   | -   | -   | \n| 13th  | +5                | -                                                                       | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | -   | -   | \n| 14th  | +5                | Destroy Undead (CR 3)                                                   | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | -   | -   | \n| 15th  | +5                | -                                                                       | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | -   | \n| 16th  | +5                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | -   | \n| 17th  | +6                | Destroy Undead (CR 4), Divine Domain Feature                            | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | 1   | \n| 18th  | +6                | Channel Divinity (3/rest)                                               | 5              | 4   | 3   | 3   | 3   | 3   | 1   | 1   | 1   | 1   | \n| 19th  | +6                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | \n| 20th  | +6                | Divine Intervention improvement                                         | 5              | 4   | 3   | 3   | 3   | 3   | 2   | 2   | 1   | 1   |',
+    // spellcasting_ability: 'Wisdom',
+    // subtypes_name: 'Domains',
+    // archetypes: [
+    //   {
+    //     name: 'Life Domain',
+    //     slug: 'life-domain',
+    //     desc:
+    //       'The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei). **Life Domain Spells (table)**. | Cleric Level | Spells                               | \n|--------------|--------------------------------------| \n| 1st          | bless, cure wounds                   | \n| 3rd          | lesser restoration, spiritual weapon | \n| 5th          | beacon of hope, revivify             | \n| 7th          | death ward, guardian of faith        | \n| 9th          | mass cure wounds, raise dead         |.  Bonus Proficiency. When you choose this domain at 1st level, you gain proficiency with heavy armor.  Disciple of Life. Also starting at 1st level, your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell’s level.  Channel Divinity: Preserve Life. Starting at 2nd level, you can use your Channel Divinity to heal the badly injured. As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level. Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can’t use this feature on an undead or a construct.  Blessed Healer. Beginning at 6th level, the healing spells you cast on others heal you as well. When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell’s level.  Divine Strike. At 8th level, you gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra 1d8 radiant damage to the target. When you reach 14th level, the extra damage increases to 2d8.  Supreme Healing. Starting at 17th level, when you would normally roll one or more dice to restore hit points with a spell, you instead use the highest number possible for each die. For example, instead of restoring 2d6 hit points to a creature, you restore 12.'
+    //   }
+    // ]
   }
-  //   {
-  //     id: 3,
-  //     name: 'Cleric',
-  //     desc:
-  //       ' Spellcasting. As a conduit for divine power, you can cast cleric spells.  Cantrips. At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.  Preparing and Casting Spells. The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell’s level or higher. You regain all expended spell slots when you finish a long rest. You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots. For example, if you are a 3rd-level cleric, you have four \n1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell *cure wounds*, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn’t remove it from your list of prepared spells. You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.  Spellcasting Ability. Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one. **Spell save DC** = 8 + your proficiency bonus + your Wisdom modifier. **Spell attack modifier** = your proficiency bonus + your Wisdom modifier.  Ritual Casting. You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.  Spellcasting Focus. You can use a holy symbol (see chapter 5, “Equipment”) as a spellcasting focus for your cleric spells.  Divine Domain. Choose one domain related to your deity: Knowledge, Life, Light, Nature, Tempest, Trickery, or War. Each domain is detailed at the end of the class description, and each one provides examples of gods associated with it. Your choice grants you domain spells and other features when you choose it at 1st level. It also grants you additional ways to use Channel Divinity when you gain that feature at 2nd level, and additional benefits at 6th, 8th, and 17th levels.  Domain Spells. Each domain has a list of spells—its domain spells— that you gain at the cleric levels noted in the domain description. Once you gain a domain spell, you always have it prepared, and it doesn’t count against the number of spells you can prepare each day. If you have a domain spell that doesn’t appear on the cleric spell list, the spell is nonetheless a cleric spell for you.  Channel Divinity. At 2nd level, you gain the ability to channel divine energy directly from your deity, using that energy to fuel magical effects. You start with two such effects: Turn Undead and an effect determined by your domain. Some domains grant you additional effects as you advance in levels, as noted in the domain description. When you use your Channel Divinity, you choose which effect to create. You must then finish a short or long rest to use your Channel Divinity again. Some Channel Divinity effects require saving throws. When you use such an effect from this class, the DC equals your cleric spell save DC. Beginning at 6th level, you can use your Channel. Divinity twice between rests, and beginning at 18th level, you can use it three times between rests. When you finish a short or long rest, you regain your expended uses.  Channel Divinity: Turn Undead. As an action, you present your holy symbol and speak a prayer censuring the undead. Each undead that can see or hear you within 30 feet of you must make a Wisdom saving throw. If the creature fails its saving throw, it is turned for 1 minute or until it takes any damage. A turned creature must spend its turns trying to move as far away from you as it can, and it can’t willingly move to a space within 30 feet of you. It also can’t take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If there’s nowhere to move, the creature can use the Dodge action.  Ability Score Improvement. When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above 20 using this feature.  Destroy Undead. Starting at 5th level, when an undead fails its saving throw against your Turn Undead feature, the creature is instantly destroyed if its challenge rating is at or below a certain threshold, as shown in the Destroy Undead table. **Destroy Undead (table)**. | Cleric Level | Destroys Undead of CR. | \n|--------------|--------------------------| \n| 5th          | 1/2 or lower             | \n| 8th          | 1 or lower               | \n| 11th         | 2 or lower               | \n| 14th         | 3 or lower               | \n| 17th         | 4 or lower               |.  Divine Intervention. Beginning at 10th level, you can call on your deity to intervene on your behalf when your need is great. Imploring your deity’s aid requires you to use your action. Describe the assistance you seek, and roll percentile dice. If you roll a number equal to or lower than your cleric level, your deity intervenes. The GM chooses the nature of the intervention; the effect of any cleric spell or cleric domain spell would be appropriate. If your deity intervenes, you can’t use this feature again for 7 days. Otherwise, you can use it again after you finish a long rest. At 20th level, your call for intervention succeeds automatically, no roll required.',
-  //     hit_dice: '1d8',
-  //     armor_prof: 'Light armor, medium armor, shields',
-  //     weap_prof: 'Simple weapons',
-  //     tool_prof: null,
-  //     save_prof: 'Wisdom, Charisma',
-  //     check_prof:
-  //       'Choose two from History, Insight, Medicine, Persuasion, and Religion',
-  //     equipment:
-  //       'You start with the following equipment, in addition to the equipment granted by your background:. * (*a*) a mace or (*b*) a warhammer (if proficient) \n* (*a*) scale mail, (*b*) leather armor, or (*c*) chain mail (if proficient) \n* (*a*) a light crossbow and 20 bolts or (*b*) any simple weapon \n* (*a*) a priest’s pack or (*b*) an explorer’s pack \n* A shield and a holy symbol',
-  //     table:
-  //       '| Level | Proficiency Bonus | Features                                                                | Cantrips Known | 1st | 2nd | 3rd | 4th | 5th | 6th | 7th | 8th | 9th | \n|-------|-------------------|-------------------------------------------------------------------------|----------------|-----|-----|-----|-----|-----|-----|-----|-----|-----| \n| 1st   | +2                | Spellcasting, Divine Domain                                             | 3              | 2   | -   | -   | -   | -   | -   | -   | -   | -   | \n| 2nd   | +2                | Channel Divinity (1/rest), Divine Domain Feature                        | 3              | 3   | -   | -   | -   | -   | -   | -   | -   | -   | \n| 3rd   | +2                | -                                                                       | 3              | 4   | 2   | -   | -   | -   | -   | -   | -   | -   | \n| 4th   | +2                | Ability Score Improvement                                               | 4              | 4   | 3   | -   | -   | -   | -   | -   | -   | -   | \n| 5th   | +3                | Destroy Undead (CR 1/2)                                                 | 4              | 4   | 3   | 2   | -   | -   | -   | -   | -   | -   | \n| 6th   | +3                | Channel Divinity (2/rest), Divine Domain Feature                        | 4              | 4   | 3   | 3   | -   | -   | -   | -   | -   | -   | \n| 7th   | +3                | -                                                                       | 4              | 4   | 3   | 3   | 1   | -   | -   | -   | -   | -   | \n| 8th   | +3                | Ability Score Improvement, Destroy Undead (CR 1), Divine Domain Feature | 4              | 4   | 3   | 3   | 2   | -   | -   | -   | -   | -   | \n| 9th   | +4                | -                                                                       | 4              | 4   | 3   | 3   | 3   | 1   | -   | -   | -   | -   | \n| 10th  | +4                | Divine Intervention                                                     | 5              | 4   | 3   | 3   | 3   | 2   | -   | -   | -   | -   | \n| 11th  | +4                | Destroy Undead (CR 2)                                                   | 5              | 4   | 3   | 3   | 3   | 2   | 1   | -   | -   | -   | \n| 12th  | +4                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 2   | 1   | -   | -   | -   | \n| 13th  | +5                | -                                                                       | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | -   | -   | \n| 14th  | +5                | Destroy Undead (CR 3)                                                   | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | -   | -   | \n| 15th  | +5                | -                                                                       | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | -   | \n| 16th  | +5                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | -   | \n| 17th  | +6                | Destroy Undead (CR 4), Divine Domain Feature                            | 5              | 4   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | 1   | \n| 18th  | +6                | Channel Divinity (3/rest)                                               | 5              | 4   | 3   | 3   | 3   | 3   | 1   | 1   | 1   | 1   | \n| 19th  | +6                | Ability Score Improvement                                               | 5              | 4   | 3   | 3   | 3   | 3   | 2   | 1   | 1   | 1   | \n| 20th  | +6                | Divine Intervention improvement                                         | 5              | 4   | 3   | 3   | 3   | 3   | 2   | 2   | 1   | 1   |',
-  //     spellcasting_ability: 'Wisdom',
-  //     subtypes_name: 'Domains',
-  //     archetypes: [
-  //       {
-  //         name: 'Life Domain',
-  //         slug: 'life-domain',
-  //         desc:
-  //           'The Life domain focuses on the vibrant positive energy—one of the fundamental forces of the universe—that sustains all life. The gods of life promote vitality and health through healing the sick and wounded, caring for those in need, and driving away the forces of death and undeath. Almost any non-evil deity can claim influence over this domain, particularly agricultural deities (such as Chauntea, Arawai, and Demeter), sun gods (such as Lathander, Pelor, and Re-Horakhty), gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and Diancecht), and gods of home and community (such as Hestia, Hathor, and Boldrei). **Life Domain Spells (table)**. | Cleric Level | Spells                               | \n|--------------|--------------------------------------| \n| 1st          | bless, cure wounds                   | \n| 3rd          | lesser restoration, spiritual weapon | \n| 5th          | beacon of hope, revivify             | \n| 7th          | death ward, guardian of faith        | \n| 9th          | mass cure wounds, raise dead         |.  Bonus Proficiency. When you choose this domain at 1st level, you gain proficiency with heavy armor.  Disciple of Life. Also starting at 1st level, your healing spells are more effective. Whenever you use a spell of 1st level or higher to restore hit points to a creature, the creature regains additional hit points equal to 2 + the spell’s level.  Channel Divinity: Preserve Life. Starting at 2nd level, you can use your Channel Divinity to heal the badly injured. As an action, you present your holy symbol and evoke healing energy that can restore a number of hit points equal to five times your cleric level. Choose any creatures within 30 feet of you, and divide those hit points among them. This feature can restore a creature to no more than half of its hit point maximum. You can’t use this feature on an undead or a construct.  Blessed Healer. Beginning at 6th level, the healing spells you cast on others heal you as well. When you cast a spell of 1st level or higher that restores hit points to a creature other than you, you regain hit points equal to 2 + the spell’s level.  Divine Strike. At 8th level, you gain the ability to infuse your weapon strikes with divine energy. Once on each of your turns when you hit a creature with a weapon attack, you can cause the attack to deal an extra 1d8 radiant damage to the target. When you reach 14th level, the extra damage increases to 2d8.  Supreme Healing. Starting at 17th level, when you would normally roll one or more dice to restore hit points with a spell, you instead use the highest number possible for each die. For example, instead of restoring 2d6 hit points to a creature, you restore 12.'
-  //       }
-  //     ]
-  //   },
   //   {
   //     id: 4,
   //     name: 'Druid',
