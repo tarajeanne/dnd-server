@@ -81,7 +81,7 @@ const UsersService = {
           speed: 0,
           languages: [
             {
-              name: 'Language: Common',
+              name: 'Common',
               variable: false,
               depends_on: null
             }

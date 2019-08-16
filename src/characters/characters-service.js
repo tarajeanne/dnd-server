@@ -114,7 +114,8 @@ const charactersService = {
         'armor_prof',
         'hit_dice',
         'spell_slots',
-        'save_prof'
+        'save_prof',
+        'hitDice'
       ];
 
       staticAttributes.forEach((att) => {
@@ -131,7 +132,6 @@ const charactersService = {
         'armor'
       ];
       variableAttributes.forEach((att) => {
-        console.log(att);
         newChar[att] = newChar[att].filter((i) => i.depends_on !== 'class');
         if (classData[att]) {
           newChar[att].push(...classData[att]);
@@ -204,11 +204,9 @@ const charactersService = {
   },
 
   updateEquipment(db, id, index, name) {
-    console.log('updating equipment!!');
     return charactersService.getCharacterById(db, id).then((character) => {
       let newChar = { ...character.character };
       newChar.equipment[index].name = name;
-      console.log(newChar.equipment[index].name);
       return db('characters')
         .where('id', id)
         .update({
@@ -299,6 +297,10 @@ const charactersService = {
   },
 
   updateStats(character) {
+
+    character.hp = character.abilities.constitution.mod + Number(character.hitDice.split('d')[1]);
+    console.log(character.abilities.constitution.mod, character.hitDice);
+    console.log(character.hp);
     for (let stat in character.abilities) {
       character.abilities[stat].total = character.abilities[stat].base;
       character.asi.forEach((asi) => {
@@ -357,26 +359,6 @@ const charactersService = {
         character.ability_checks[prof.name].prof = Math.floor(
           character.prof_bonus * (prof.coef || 1)
         );
-      }
-    });
-
-    character.armor.forEach((armor) => {
-      character.ac = armor.ac_base;
-      if (armor.ac_mod) {
-        if (armor.ac_mod === 'max2') {
-          if (character.abilities.dexterity.mod > 2) {
-            character.ac = character.ac + 2;
-          } else {
-            character.ac = character.ac + character.abilities.dexterity.mod;
-          }
-        }
-      }
-      if (armor.stealth) {
-        character.other_prof.push({
-          name: 'You have disadvantage on stealth due to heavy armor.',
-          variable: false,
-          depends_on: 'armor'
-        });
       }
     });
 
