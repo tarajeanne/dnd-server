@@ -299,8 +299,6 @@ const charactersService = {
   updateStats(character) {
 
     character.hp = character.abilities.constitution.mod + Number(character.hitDice.split('d')[1]);
-    console.log(character.abilities.constitution.mod, character.hitDice);
-    console.log(character.hp);
     for (let stat in character.abilities) {
       character.abilities[stat].total = character.abilities[stat].base;
       character.asi.forEach((asi) => {

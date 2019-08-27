@@ -9,7 +9,6 @@ const jsonBodyParser = express.json();
 
 usersRouter.post('/', jsonBodyParser, (req, res, next) => {
   const { password, username } = req.body;
-  console.log(username, password);
 
   for (const field of ['username', 'password']) {
     if (!req.body[field])
@@ -21,7 +20,6 @@ usersRouter.post('/', jsonBodyParser, (req, res, next) => {
   const passwordError = usersService.validatePassword(password);
 
   if (passwordError) {
-    console.log('there was a password error!!!');
     return res.status(400).json({ error: passwordError });
   }
 
@@ -42,7 +40,6 @@ usersRouter.post('/', jsonBodyParser, (req, res, next) => {
         return usersService
           .insertUser(req.app.get('db'), newUser)
           .then((user) => {
-            console.log('getting closer!');
             return res
               .status(201)
               .location(path.posix.join(req.originalUrl, `/${user.id}`))

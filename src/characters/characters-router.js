@@ -23,7 +23,6 @@ charactersRouter
 .route('/:characterId/name')
 .patch(requireAuth, jsonBodyParser, (req, res, next) => {
   const newData = req.body.newData;
-  console.log(newData);
   const { characterId } = req.params;
   charactersService
     .updateName(req.app.get('db'), characterId, newData)
@@ -154,7 +153,6 @@ charactersRouter
   .route('/:characterId/equipment')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { name, index } = req.body;
-    console.log(name, index);
     const { characterId } = req.params;
     charactersService
       .updateEquipment(req.app.get('db'), characterId, index, name)

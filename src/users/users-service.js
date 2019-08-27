@@ -5,8 +5,7 @@ const charactersService = require('../characters/characters-service');
 
 const UsersService = {
   hasUserWithUserName(db, username) {
-    console.log('is there already a user with this name!?'
-    )
+
     return db('users')
       .where({ username })
       .first()
@@ -14,7 +13,6 @@ const UsersService = {
   },
 
   insertUser(db, newUser) {
-    console.log('inserting user', newUser);
       return db
       .insert(newUser)
       .into('users')
@@ -43,7 +41,6 @@ const UsersService = {
   },
 
   serializeUser(user) {
-    console.log('is this where its going wrong?');
     return {
       id: user.id,
       username: xss(user.username),
@@ -51,7 +48,6 @@ const UsersService = {
     };
   },
   getCharactersForUser(db, userId) {
-    console.log('userId',userId);
     return db
       .from('user_character')
       .select('user_character.character_id')
@@ -238,7 +234,6 @@ const UsersService = {
           .insert({user_id: userId, character_id: character.id})
           .returning('character_id')
           .then(([character_id]) => {
-            console.log(character_id);
             return(character_id);
           })
           .then(character_id => charactersService.getCharacterById(db, character_id)
