@@ -41,7 +41,7 @@ const alignmentStore = [
   },
   {
     id: 9,
-    name: "Lawful Good",
+    name: "Chaotic Evil",
     desc: "Your character acts with arbitrary violence, spurred by their greed, hatred, or bloodlust."
   }
 ];
