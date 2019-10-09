@@ -10,7 +10,7 @@ charactersRouter.route('/:characterId')
   charactersService
     .getCharacterById(req.app.get('db'), req.params.characterId)
     .then((character) => {
-      return res.json(character.character);
+      return res.json({...character.character, id: character.id});
     });
 })
 .delete(requireAuth, (req, res) => {
