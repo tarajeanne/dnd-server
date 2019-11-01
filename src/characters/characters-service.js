@@ -295,10 +295,13 @@ const charactersService = {
         .then(charactersService.getCharacterById(db, character.id));
     });
   },
-
   updateStats(character) {
+    //update character's hp based on constitution
+    character.hp =
+      character.abilities.constitution.mod +
+      Number(character.hitDice.split('d')[1]);
 
-    character.hp = character.abilities.constitution.mod + Number(character.hitDice.split('d')[1]);
+    //update character's abilities
     for (let stat in character.abilities) {
       character.abilities[stat].total = character.abilities[stat].base;
       character.asi.forEach((asi) => {
@@ -343,7 +346,23 @@ const charactersService = {
       wisChecks,
       charChecks
     ];
+
+    //save proficiencies in new object to not loop through ability checks twice
+    let profs = {};
+    character.check_prof.forEach((prof) => {
+      if (prof.name) {
+        profs[prof.name] = prof.coef || 1;
+      }
+    });
     for (let check in character.ability_checks) {
+      if (profs[check]) {
+        character.ability_checks[check].prof = Math.floor(
+          character.prof_bonus * profs[check]
+        );
+      } else {
+        character.ability_checks[check].prof = 0;
+      }
+
       allChecks.forEach((checkList) => {
         if (checkList.includes(check)) {
           character.ability_checks[check].mod =
@@ -351,14 +370,6 @@ const charactersService = {
         }
       });
     }
-
-    character.check_prof.forEach((prof) => {
-      if (prof.name) {
-        character.ability_checks[prof.name].prof = Math.floor(
-          character.prof_bonus * (prof.coef || 1)
-        );
-      }
-    });
 
     Object.values(character.ability_checks).forEach((check) => {
       check.total = check.mod + check.prof;

@@ -53,7 +53,7 @@ app.use(function errorHandler(error, req, res, next) {
     response = { error: { message: 'server error' } };
   } else {
     console.error(error);
-    response = { message: error.message, error };
+    response = { error };
   }
 
   res.status(500).json(response);
