@@ -11,8 +11,6 @@ describe('Users Endpoints', function() {
     testUserCharacter
   } = helpers.makeFixtures();
 
-  const testUser = testUsers[1];
-
   before('make knex instance', () => {
     db = knex({
       client: 'pg',
