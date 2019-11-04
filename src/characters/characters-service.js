@@ -61,19 +61,24 @@ const charactersService = {
   },
 
   updateRace(db, id, newRace) {
+    //finds character in db
     return charactersService.getCharacterById(db, id).then((character) => {
       let newChar = { ...character.character };
       newChar.race = newRace;
 
+      //gets appropriate data about that rate
       const raceData = raceStore.find(
         (race) => race.name.toLowerCase() === newRace.toLowerCase()
       );
+
+      //attributes with only one value--just replace current value
       const staticAttributes = ['size', 'speed'];
 
       staticAttributes.forEach((att) => {
         newChar[att] = raceData[att];
       });
 
+      //attributes that have complex data types and user input--check source of value before changing
       const variableAttributes = [
         'asi',
         'languages',
@@ -82,6 +87,7 @@ const charactersService = {
         'skills_and_features'
       ];
 
+      //removes all attributes based on previous race, adds attributes for new race
       variableAttributes.forEach((att) => {
         newChar[att] = newChar[att].filter((i) => i.depends_on !== 'race');
         if (raceData[att]) {
@@ -110,6 +116,7 @@ const charactersService = {
         (i) => i.name.toLowerCase() === newClass.toLowerCase()
       );
 
+      //attributes with only one value
       const staticAttributes = [
         'armor_prof',
         'hit_dice',
@@ -118,10 +125,12 @@ const charactersService = {
         'hitDice'
       ];
 
+      //replace current value for each attribute
       staticAttributes.forEach((att) => {
         newChar[att] = classData[att];
       });
 
+      //attributes with complex data types from multiple user selections
       const variableAttributes = [
         'skills_and_features',
         'weap_prof',
@@ -131,6 +140,8 @@ const charactersService = {
         'weapons',
         'armor'
       ];
+
+      //replace attributes based on class with current class attributes
       variableAttributes.forEach((att) => {
         newChar[att] = newChar[att].filter((i) => i.depends_on !== 'class');
         if (classData[att]) {
@@ -165,6 +176,8 @@ const charactersService = {
         'equipment',
         'skills_and_features'
       ];
+
+      //replace attributes based on background with current background attributes
       variableAttributes.forEach((att) => {
         newChar[att] = newChar[att].filter(
           (i) => i.depends_on !== 'background'
@@ -295,6 +308,8 @@ const charactersService = {
         .then(charactersService.getCharacterById(db, character.id));
     });
   },
+
+  //updates all of a character's stats when they update anything that affects their statsx
   updateStats(character) {
     //update character's hp based on constitution
     character.hp =
@@ -354,6 +369,7 @@ const charactersService = {
         profs[prof.name] = prof.coef || 1;
       }
     });
+    
     for (let check in character.ability_checks) {
       if (profs[check]) {
         character.ability_checks[check].prof = Math.floor(

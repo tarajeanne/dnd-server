@@ -31,6 +31,7 @@ function makeCharactersArray() {
     {
       id: '1',
       character: JSON.stringify({
+        id: '1',
         name: 'Sabrill',
         ac: 0,
         race: '',
@@ -194,6 +195,7 @@ function makeCharactersArray() {
     {
       id: '2',
       character: JSON.stringify({
+        id: '2',
         name: 'Cal',
         ac: 0,
         race: '',
