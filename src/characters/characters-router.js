@@ -5,32 +5,33 @@ const { requireAuth } = require('../middleware/jwt-auth');
 const charactersRouter = express.Router();
 const jsonBodyParser = express.json();
 
-charactersRouter.route('/:characterId')
-.get(requireAuth, (req, res) => {
-  charactersService
-    .getCharacterById(req.app.get('db'), req.params.characterId)
-    .then((character) => {
-      return res.json({...character.character, id: character.id});
-    });
-})
-.delete(requireAuth, (req, res) => {
-  charactersService
-    .deleteCharacter(req.app.get('db'), req.params.characterId)
-    .then(() => res.send(201))
-})
+charactersRouter
+  .route('/:characterId')
+  .get(requireAuth, (req, res) => {
+    charactersService
+      .getCharacterById(req.app.get('db'), req.params.characterId)
+      .then((character) => {
+        return res.json({ ...character.character, id: character.id });
+      });
+  })
+  .delete(requireAuth, (req, res) => {
+    charactersService
+      .deleteCharacter(req.app.get('db'), req.params.characterId)
+      .then(() => res.send(201));
+  });
 
 charactersRouter
-.route('/:characterId/name')
-.patch(requireAuth, jsonBodyParser, (req, res, next) => {
-  const newData = req.body.newData;
-  const { characterId } = req.params;
-  charactersService
-    .updateName(req.app.get('db'), characterId, newData)
-    .then((character) => {
-      return res.json(character.character);
-    })
-    .catch(next);
-});
+  .route('/:characterId/name')
+  .patch(requireAuth, jsonBodyParser, (req, res, next) => {
+    const newData = req.body.newData;
+    const { characterId } = req.params;
+    charactersService
+      .updateName(req.app.get('db'), characterId, newData)
+      .then((character) => {
+        return res.json(character.character);
+      })
+      .catch(next);
+  });
 
 charactersRouter
   .route('/:characterId/race')
@@ -61,7 +62,7 @@ charactersRouter
 charactersRouter
   .route('/:characterId/background')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
-    const { newData} = req.body;
+    const { newData } = req.body;
     const { characterId } = req.params;
     charactersService
       .updateBackground(req.app.get('db'), characterId, newData)
@@ -71,7 +72,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/asi')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { name, index } = req.body;
@@ -84,7 +85,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/prof')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { name, index } = req.body;
@@ -97,7 +98,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/base')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { stat, num } = req.body;
@@ -110,7 +111,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/alignment')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { newData } = req.body;
@@ -123,7 +124,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/weapon')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { name, index } = req.body;
@@ -136,7 +137,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/armor')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { index, name } = req.body;
@@ -149,7 +150,7 @@ charactersRouter
       .catch(next);
   });
 
-  charactersRouter
+charactersRouter
   .route('/:characterId/equipment')
   .patch(requireAuth, jsonBodyParser, (req, res, next) => {
     const { name, index } = req.body;

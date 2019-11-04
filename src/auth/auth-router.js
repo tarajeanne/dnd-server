@@ -17,7 +17,7 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
       });
     }
   }
-  
+
   loginUser.username = loginUser.username.toLowerCase();
 
   AuthService.getUserWithUserName(req.app.get('db'), loginUser.username)

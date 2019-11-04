@@ -5,7 +5,6 @@ const charactersService = require('../characters/characters-service');
 
 const UsersService = {
   hasUserWithUserName(db, username) {
-
     return db('users')
       .where({ username })
       .first()
@@ -13,7 +12,7 @@ const UsersService = {
   },
 
   insertUser(db, newUser) {
-      return db
+    return db
       .insert(newUser)
       .into('users')
       .returning('*')
@@ -52,18 +51,19 @@ const UsersService = {
       .from('user_character')
       .select('user_character.character_id')
       .where('user_character.user_id', userId)
-      .then(res => {
-        const ids = res.map(id => id.character_id);
+      .then((res) => {
+        const ids = res.map((id) => id.character_id);
         return db
           .select('*')
           .from('characters')
-          .whereIn('id', ids)
-      })
+          .whereIn('id', ids);
+      });
   },
 
   createCharacter(db, name, userId) {
     return db
-      .insert({id: cuid(),
+      .insert({
+        id: cuid(),
         character: JSON.stringify({
           name: name,
           ac: 0,
@@ -84,7 +84,7 @@ const UsersService = {
           ],
           other_prof: [],
           asi: [],
-          tool_prof:[],
+          tool_prof: [],
           weap_prof: [],
           save_prof: [],
           check_prof: [],
@@ -228,15 +228,16 @@ const UsersService = {
       .into('characters')
       .returning('*')
       .then(([character]) => character)
-      .then((character) => 
+      .then((character) =>
         db
           .into('user_character')
-          .insert({user_id: userId, character_id: character.id})
+          .insert({ user_id: userId, character_id: character.id })
           .returning('character_id')
           .then(([character_id]) => {
-            return(character_id);
+            return character_id;
           })
-          .then(character_id => charactersService.getCharacterById(db, character_id)
+          .then((character_id) =>
+            charactersService.getCharacterById(db, character_id)
           )
       );
   }

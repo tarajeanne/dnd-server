@@ -30,7 +30,7 @@ const AuthService = {
   //parses JSON web token and returns object with key user_id
   parseJwt(token) {
     return jwt.decode(token);
-  },
+  }
 };
 
 module.exports = AuthService;

@@ -369,7 +369,7 @@ const charactersService = {
         profs[prof.name] = prof.coef || 1;
       }
     });
-    
+
     for (let check in character.ability_checks) {
       if (profs[check]) {
         character.ability_checks[check].prof = Math.floor(
