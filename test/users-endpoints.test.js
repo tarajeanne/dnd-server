@@ -65,9 +65,9 @@ describe('Users Endpoints', function() {
         .get('/api/users/characters')
         .set('Authorization', helpers.makeAuthToken(testUsers[1]))
         .expect(200)
-        .expect(res => {
+        .expect((res) => {
           expect(res.body[0].character).to.eql(JSON.parse(expectedChar));
-        })
+        });
     });
   });
 });
