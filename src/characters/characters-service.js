@@ -393,7 +393,7 @@ const charactersService = {
   },
 
   serializeCharacter(character) {
-    return { ...character, name: xss(name) }
+    return { ...character, name: xss(character.name) }
   }
 };
 
