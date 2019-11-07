@@ -1,5 +1,4 @@
 const knex = require('knex');
-const jwt = require('jsonwebtoken');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
@@ -69,11 +68,12 @@ describe('Character Endpoints', function() {
     const endpoints = {
       name: 'Cal',
       race: 'Dwarf',
+      class: 'bard',
       alignment: 'Chaotic Good',
       background: 'Acolyte'
     };
 
-    for (attribute in endpoints) {
+    for (let attribute in endpoints) {
       it(`/${attribute} responds with 200 and changes ${attribute}`, () => {
         return supertest(app)
           .patch(`/api/characters/${testCharacter.id}/${attribute}`)
