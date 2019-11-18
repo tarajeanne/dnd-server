@@ -1,4 +1,4 @@
-# Symptom Tracker Server
+# DnD Character Creator Server
 
 Deployed server URL: [https://polar-escarpment-46272.herokuapp.com/api/)
 
