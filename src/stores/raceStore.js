@@ -176,53 +176,53 @@ const raceStore = [
       }
     ]
   },
-  // {
-  //   id: 3,
-  //   name: 'Halfling',
-  //   desc:
-  //     ' Halfling TraitsYour halfling character has a number of traits in common with all other halflings.',
-  //   asi: [{
-  //     name: 'Dexterity',
-  //     variable: false,
-  //     depends_on: 'race',
-  //     magnitude: 2
-  //   }],
-  //   weap_prof: [],
-  //   age: 'Adults at 20, they live until about 150.',
-  //   alignment:
-  //     'Kind, orderly, and traditional, halflings tend toward lawful good.',
-  //   size: 'Small',
-  //   size_desc: 'Average about 3 feet tall and weigh 40 lbs.',
-  //   speed: 25,
-  //   languages:
-  //   [
-  //     {
-  //       name: 'Halfling',
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }
-  //   ],
-  //   traits: {
-  //     Lucky:
-  //       'When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll',
-  //     Brave: 'You have advantage on saving throws against being frightened.',
-  //     'Halfling Nimbleness':
-  //       'You can move through the space of any creature that is of a size larger than yours.'
-  //   },
-  //   subraces: [
-  //     {
-  //       name: 'Lightfoot',
-  //       slug: 'lightfoot',
-  //       desc:
-  //         'As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You’re inclined to be affable and get along well with others.Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.',
-  //       asi: {
-  //         Charisma: 1
-  //       },
-  //       asi_desc: 'Ability Score Increase. Your Charisma score increases by 1.',
-  //       document_slug: 'systems-reference-document'
-  //     }
-  //   ]
-  // },
+  {
+    id: 3,
+    name: 'Halfling',
+    desc:
+      ' Halfling TraitsYour halfling character has a number of traits in common with all other halflings.',
+    asi: [{
+      name: 'Dexterity',
+      variable: false,
+      depends_on: 'race',
+      magnitude: 2
+    }],
+    weap_prof: [],
+    age: 'Adults at 20, they live until about 150.',
+    alignment:
+      'Kind, orderly, and traditional, halflings tend toward lawful good.',
+    size: 'Small',
+    size_desc: 'Average about 3 feet tall and weigh 40 lbs.',
+    speed: 25,
+    languages:
+    [
+      {
+        name: 'Halfling',
+        variable: false,
+        depends_on: 'race'
+      }
+    ],
+    traits: {
+      Lucky:
+        'When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll',
+      Brave: 'You have advantage on saving throws against being frightened.',
+      'Halfling Nimbleness':
+        'You can move through the space of any creature that is of a size larger than yours.'
+    },
+    subraces: [
+      {
+        name: 'Lightfoot',
+        slug: 'lightfoot',
+        desc:
+          'As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You’re inclined to be affable and get along well with others.Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life.',
+        asi: {
+          Charisma: 1
+        },
+        asi_desc: 'Ability Score Increase. Your Charisma score increases by 1.',
+        document_slug: 'systems-reference-document'
+      }
+    ]
+  },
   {
     id: 4,
     name: 'Human',
