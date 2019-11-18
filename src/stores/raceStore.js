@@ -373,71 +373,71 @@ const raceStore = [
     ]
   },
   {
-  //   id: 7,
-  //   name: 'Half-Elf',
-  //   desc:
-  //     ' Half-Elf TraitsYour half-elf character has some qualities in common with elves and some that are unique to half-elves.',
-  //   asi: [{
-  //     name: 'Charisma',
-  //     variable: false,
-  //     depends_on: 'race',
-  //     magnitude: 2
-  //   },
-  //   {
-  //     name: '',
-  //     variable: true,
-  //     depends_on: 'race',
-  //     magnitude: 1,
-  //     norepeat: true
-  //   },
-  //   {
-  //     name: '',
-  //     variable: true,
-  //     depends_on: 'race',
-  //     magnitude: 1,
-  //     norepeat: true
-  //   }],
-  //   weap_prof: [],
-  //   age: 'Adults in their early 20s, they can live 180 years.',
-  //   alignment:
-  //     'Scoffing and rules and leaders, half-elves tend toward the chaos of their elvish ancestors.',
-  //   size: 'Medium',
-  //   size_desc: 'Range from 5 to 6 feet tall.',
-  //   speed: 30,
-  //   languages:  [
-  //     {
-  //       name: 'Elvish',
-  //       variable: false,
-  //       depends_on: 'race'
-  //     },
-  //     {
-  //       name: '',
-  //       variable: true,
-  //       depends_on: 'race'
-  //     }
-  //   ],
-  //   check_prof: [
-  //     {
-  //       name: '',
-  //       variable: true,
-  //       depends_on: 'race',
-  //       norepeat: true
-  //     },
-  //     {
-  //       name: '',
-  //       variable: true,
-  //       depends_on: 'race',
-  //       norepeat: true
-  //     }
-  //   ],
-  //   traits: {
-  //     'Fey Ancestry':
-  //       'You have advantage on saving throws against being charmed, and magic can’t put you to sleep.',
-  //     'Darkvision.':
-  //       'Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
-  //   },
-  //   subraces: []
-  // },
+    id: 7,
+    name: 'Half-Elf',
+    desc:
+      ' Half-Elf TraitsYour half-elf character has some qualities in common with elves and some that are unique to half-elves.',
+    asi: [{
+      name: 'Charisma',
+      variable: false,
+      depends_on: 'race',
+      magnitude: 2
+    },
+    {
+      name: '',
+      variable: true,
+      depends_on: 'race',
+      magnitude: 1,
+      norepeat: true
+    },
+    {
+      name: '',
+      variable: true,
+      depends_on: 'race',
+      magnitude: 1,
+      norepeat: true
+    }],
+    weap_prof: [],
+    age: 'Adults in their early 20s, they can live 180 years.',
+    alignment:
+      'Scoffing and rules and leaders, half-elves tend toward the chaos of their elvish ancestors.',
+    size: 'Medium',
+    size_desc: 'Range from 5 to 6 feet tall.',
+    speed: 30,
+    languages:  [
+      {
+        name: 'Elvish',
+        variable: false,
+        depends_on: 'race'
+      },
+      {
+        name: '',
+        variable: true,
+        depends_on: 'race'
+      }
+    ],
+    check_prof: [
+      {
+        name: '',
+        variable: true,
+        depends_on: 'race',
+        norepeat: true
+      },
+      {
+        name: '',
+        variable: true,
+        depends_on: 'race',
+        norepeat: true
+      }
+    ],
+    traits: {
+      'Fey Ancestry':
+        'You have advantage on saving throws against being charmed, and magic can’t put you to sleep.',
+      'Darkvision.':
+        'Thanks to your elf blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
+    },
+    subraces: []
+  },
     {
       id: 8,
       name: 'Half-Orc',
