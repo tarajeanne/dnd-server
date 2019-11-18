@@ -616,13 +616,27 @@ const raceStore = [
         depends_on: 'race'
       }
     ],
-    traits: {
-      'Hellish Resistance': 'You have resistance to fire damage.',
-      'Infernal Legacy':
-        'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.',
-      Darkvision:
-        'Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
-    },
+    other_prof: [],
+    skills_and_features: [
+      {
+        name: 'Hellish Resistance',
+        depends_on: 'race',
+        variable: false,
+        desc: 'You have resistance to fire damage.'
+      },
+      {
+        name: 'Infernal Legacy',
+        depends_on: 'race',
+        variable: false,
+        desc: 'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.'
+      },
+      {
+        name: 'Darkvision',
+        depends_on: 'race',
+        variable: false,
+        desc: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
+      }
+    ],
     subraces: []
   }
 ];
