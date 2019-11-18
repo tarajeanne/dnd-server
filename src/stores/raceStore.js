@@ -372,7 +372,8 @@ const raceStore = [
         name: 'Gnome Cunning',
         depends_on: 'race',
         variable: false,
-        desc: 'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.'
+        desc:
+          'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.'
       }
     ],
     skills_and_features: [
@@ -380,9 +381,9 @@ const raceStore = [
         name: 'Darkvision',
         variable: false,
         depends_on: 'race',
-        desc: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
+        desc:
+          'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
       }
-    
     ],
     subraces: [
       {
@@ -507,7 +508,8 @@ const raceStore = [
         name: 'Fey Ancestry',
         variable: false,
         depends_on: 'race',
-        desc: 'You have advantage on saving throws against being charmed, and magic can’t put you to sleep.',
+        desc:
+          'You have advantage on saving throws against being charmed, and magic can’t put you to sleep.'
       }
     ],
     skills_and_features: [
@@ -515,7 +517,8 @@ const raceStore = [
         name: 'Darkvision',
         variable: false,
         depends_on: 'race',
-        desc: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
+        desc:
+          'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
       }
     ],
     subraces: []
@@ -567,19 +570,22 @@ const raceStore = [
         name: 'Relentless Endurance',
         variable: false,
         depends_on: 'race',
-        desc: 'When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.'
+        desc:
+          'When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.'
       },
       {
         name: 'Savage Attacks',
         variable: false,
         depends_on: 'race',
-        desc: 'When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.'
+        desc:
+          'When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.'
       },
       {
         name: 'Darkvision',
         variable: false,
         depends_on: 'race',
-        desc: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
+        desc:
+          'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
       }
     ],
     subraces: []
@@ -628,13 +634,15 @@ const raceStore = [
         name: 'Infernal Legacy',
         depends_on: 'race',
         variable: false,
-        desc: 'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.'
+        desc:
+          'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.'
       },
       {
         name: 'Darkvision',
         depends_on: 'race',
         variable: false,
-        desc: 'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
+        desc:
+          'You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light.'
       }
     ],
     subraces: []
