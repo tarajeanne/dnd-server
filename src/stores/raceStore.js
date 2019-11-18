@@ -322,7 +322,7 @@ const raceStore = [
         depends_on: 'race'
       }
     ]
-  }
+  },
   {
     id: 6,
     name: 'Gnome',
@@ -483,43 +483,43 @@ const raceStore = [
   //     },
   //     subraces: []
   //   },
-  //   {
-  //     id: 9,
-  //     name: 'Tiefling',
-  //     desc:
-  //       ' Tiefling TraitsTieflings share certain racial traits as a result of their infernal descent.',
-  //     asi: [{
-  //       name: 'Intelligence',
-  //       magnitude: 1,
-  //       variable: false,
-  //       depends_on: 'race'
-  //     },
-  //     {
-  //       name: 'Charisma',
-  //       magnitude: 2,
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }],
-  //     weap_prof: [],
-  //     age: 'Tieflings mature around 20 and live around 100 years.',
-  //     alignment: 'Most tieflings tend toward chaotic evil.',
-  //     size: 'Medium',
-  //     size_desc: 'Same size and build as humans.',
-  //     speed: 30,
-  //     languages: [{
-  //       name: 'Infernal',
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }],
-  //     traits: {
-  //       'Hellish Resistance': 'You have resistance to fire damage.',
-  //       'Infernal Legacy':
-  //         'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.',
-  //       Darkvision:
-  //         'Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
-  //     },
-  //     subraces: []
-  //   }
+    {
+      id: 9,
+      name: 'Tiefling',
+      desc:
+        ' Tiefling TraitsTieflings share certain racial traits as a result of their infernal descent.',
+      asi: [{
+        name: 'Intelligence',
+        magnitude: 1,
+        variable: false,
+        depends_on: 'race'
+      },
+      {
+        name: 'Charisma',
+        magnitude: 2,
+        variable: false,
+        depends_on: 'race'
+      }],
+      weap_prof: [],
+      age: 'Tieflings mature around 20 and live around 100 years.',
+      alignment: 'Most tieflings tend toward chaotic evil.',
+      size: 'Medium',
+      size_desc: 'Same size and build as humans.',
+      speed: 30,
+      languages: [{
+        name: 'Infernal',
+        variable: false,
+        depends_on: 'race'
+      }],
+      traits: {
+        'Hellish Resistance': 'You have resistance to fire damage.',
+        'Infernal Legacy':
+          'You know the *thaumaturgy* cantrip. When you reach 3rd level, you can cast the *hellish rebuke* spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the *darkness* spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.',
+        Darkvision:
+          'Thanks to your infernal heritage, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
+      },
+      subraces: []
+    }
 ];
 
 module.exports = raceStore;
