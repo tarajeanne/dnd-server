@@ -12,20 +12,6 @@ const raceStore = [
         magnitude: 2
       }
     ],
-    age:
-      'Physically mature in their 20s, but not socially adults until 50. They live about 350 years.',
-    alignment:
-      'Believing in order, justice, and fair play, dwarves tend toward lawful good.',
-    size: 'Medium',
-    size_desc: 'Between 4 and 5 feet tall, averaging 150 lbs.',
-    speed: 25,
-    languages: [
-      {
-        name: 'Dwarvish',
-        variable: false,
-        depends_on: 'race'
-      }
-    ],
     weap_prof: [
       {
         weapid: 15,
@@ -44,6 +30,20 @@ const raceStore = [
       },
       {
         weapid: 6,
+        variable: false,
+        depends_on: 'race'
+      }
+    ],
+    age:
+      'Physically mature in their 20s, but not socially adults until 50. They live about 350 years.',
+    alignment:
+      'Believing in order, justice, and fair play, dwarves tend toward lawful good.',
+    size: 'Medium',
+    size_desc: 'Between 4 and 5 feet tall, averaging 150 lbs.',
+    speed: 25,
+    languages: [
+      {
+        name: 'Dwarvish',
         variable: false,
         depends_on: 'race'
       }
@@ -107,7 +107,6 @@ const raceStore = [
       }
     ],
     weap_prof: [],
-
     age:
       'Physically mature in their 20s, but not considered adults until around 100. They live about 700 years.',
     alignment:
@@ -202,13 +201,28 @@ const raceStore = [
         depends_on: 'race'
       }
     ],
-    traits: {
-      Lucky:
-        'When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll',
-      Brave: 'You have advantage on saving throws against being frightened.',
-      'Halfling Nimbleness':
-        'You can move through the space of any creature that is of a size larger than yours.'
-    },
+    other_prof: [
+      {
+        name: 'Brave',
+        variable: false,
+        depends_on: 'race',
+        desc: 'You have advantage on saving throws against being frightened.'
+      }
+    ],
+    skills_and_features: [
+      {
+        name: 'Lucky',
+        variable: false,
+        depends_on: 'race',
+        desc: 'When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll'
+      },
+      {
+        name: 'Halfling Nimbleness',
+        depends_on: 'race',
+        variable: false,
+        desc: 'You can move through the space of any creature that is of a size larger than yours.'
+      }
+    ],
     subraces: [
       {
         name: 'Lightfoot',
