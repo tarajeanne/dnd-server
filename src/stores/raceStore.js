@@ -323,56 +323,56 @@ const raceStore = [
       }
     ]
   }
-  // {
-  //   id: 6,
-  //   name: 'Gnome',
-  //   desc:
-  //     ' Gnome TraitsYour gnome character has certain characteristics in common with all other gnomes.',
-  //   asi: [{
-  //     name: 'Intelligence',
-  //     variable: false,
-  //     depends_on: 'race',
-  //     magnitude: 2
-  //   }],
-  //   weap_prof: [],
-  //   age: 'Settle as adults by 40m and live between 350 and 500 years.',
-  //   alignment:
-  //     'Gnomes are generally good but they could be lawful scholars or chaotic ticksters.',
-  //   size: 'Small',
-  //   size_desc: 'Between 3 and 4 feet tall, averaging 40 lbs.',
-  //   speed: 25,
-  //   languages:  [
-  //     {
-  //       name: 'Gnomish',
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }
-  //   ],
-  //   traits: {
-  //     Darkvision:
-  //       'Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.',
-  //     'Gnome Cunning':
-  //       'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.'
-  //   },
-  //   subraces: [
-  //     {
-  //       name: 'Rock Gnome',
-  //       slug: 'rock-gnome',
-  //       desc:
-  //         ' Rock GnomeAs a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.',
-  //       asi: [
-  //         {
-  //           attributes: ['Constitution'],
-  //           value: 1
-  //         }
-  //       ],
-  //       asi_desc:
-  //         'Ability Score Increase. Your Constitution score increases by 1.',
-  //       document_slug: 'systems-reference-document'
-  //     }
-  //   ]
-  // },
-  // {
+  {
+    id: 6,
+    name: 'Gnome',
+    desc:
+      ' Gnome TraitsYour gnome character has certain characteristics in common with all other gnomes.',
+    asi: [{
+      name: 'Intelligence',
+      variable: false,
+      depends_on: 'race',
+      magnitude: 2
+    }],
+    weap_prof: [],
+    age: 'Settle as adults by 40m and live between 350 and 500 years.',
+    alignment:
+      'Gnomes are generally good but they could be lawful scholars or chaotic ticksters.',
+    size: 'Small',
+    size_desc: 'Between 3 and 4 feet tall, averaging 40 lbs.',
+    speed: 25,
+    languages:  [
+      {
+        name: 'Gnomish',
+        variable: false,
+        depends_on: 'race'
+      }
+    ],
+    traits: {
+      Darkvision:
+        'Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.',
+      'Gnome Cunning':
+        'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.'
+    },
+    subraces: [
+      {
+        name: 'Rock Gnome',
+        slug: 'rock-gnome',
+        desc:
+          ' Rock GnomeAs a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes.',
+        asi: [
+          {
+            attributes: ['Constitution'],
+            value: 1
+          }
+        ],
+        asi_desc:
+          'Ability Score Increase. Your Constitution score increases by 1.',
+        document_slug: 'systems-reference-document'
+      }
+    ]
+  },
+  {
   //   id: 7,
   //   name: 'Half-Elf',
   //   desc:
