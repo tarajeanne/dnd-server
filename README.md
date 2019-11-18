@@ -1,17 +1,33 @@
-# Express Boilerplate!
+# Symptom Tracker Server
 
-This is a boilerplate project used for starting new projects!
+Deployed server URL: [https://polar-escarpment-46272.herokuapp.com/api/)
 
-## Setup
+## Technology Used
 
-Complete the following steps to start a new project (NEW_PROJECT-NAME):
+Node.js
+Framework: Express
+Testing: Mocha/Chai, Supertest
+Auth/Security: jwt, xss, helmet
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+## Local dev setup
+
+If using user :
+
+```bash
+mv example.env .env
+createdb -U POSTGRESUSER symptom-tracker
+createdb -U POSTGRESUSER symptom-tracker-test
+```
+
+If your postgres user has a password be sure to set it in `.env` for all appropriate fields. Or if using a different user, update appropriately.
+
+```bash
+npm install
+npm run migrate
+env MIGRATION_DB_NAME=symptom-tracker-test npm run migrate
+```
+
+And `npm test` should work at this point
 
 ## Scripts
 
