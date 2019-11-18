@@ -438,51 +438,51 @@ const raceStore = [
   //   },
   //   subraces: []
   // },
-  //   {
-  //     id: 8,
-  //     name: 'Half-Orc',
-  //     desc:
-  //       ' Half-Orc TraitsYour half-orc character has certain traits deriving from your orc ancestry.',
-  //     asi: [{
-  //       name: 'Strength',
-  //       magnitude: 2,
-  //       variable: false,
-  //       depends_on: 'race'
-  //     },
-  //     {
-  //       name: 'Constitution',
-  //       magnitude: 1,
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }],
-  //     weap_prof: [],
-  //     age: 'Adults at 14, rarely living longer than 75 years.',
-  //     alignment:
-  //       'Orcs have a tendency toward chaos and are not particularly inclined toward good.',
-  //     size: 'Medium',
-  //     size_desc:
-  //       'Larger and bulkier than humans, ranging from 5 to well over 6 feet tall.',
-  //     speed: 30,
-  //     languages: [{
-  //       name: 'Orc',
-  //       variable: false,
-  //       depends_on: 'race'
-  //     }],
-  //     check_prof: [{
-  //       name: 'Intimidation',
-  //       variable: false,
-  //       depends_on: 'race',
-  //     }],
-  //     traits: {
-  //       'Relentless Endurance':
-  //         'When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.',
-  //       'Savage Attacks':
-  //         'When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.',
-  //       Darkvision:
-  //         'Darkvision. Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
-  //     },
-  //     subraces: []
-  //   },
+    {
+      id: 8,
+      name: 'Half-Orc',
+      desc:
+        ' Half-Orc TraitsYour half-orc character has certain traits deriving from your orc ancestry.',
+      asi: [{
+        name: 'Strength',
+        magnitude: 2,
+        variable: false,
+        depends_on: 'race'
+      },
+      {
+        name: 'Constitution',
+        magnitude: 1,
+        variable: false,
+        depends_on: 'race'
+      }],
+      weap_prof: [],
+      age: 'Adults at 14, rarely living longer than 75 years.',
+      alignment:
+        'Orcs have a tendency toward chaos and are not particularly inclined toward good.',
+      size: 'Medium',
+      size_desc:
+        'Larger and bulkier than humans, ranging from 5 to well over 6 feet tall.',
+      speed: 30,
+      languages: [{
+        name: 'Orc',
+        variable: false,
+        depends_on: 'race'
+      }],
+      check_prof: [{
+        name: 'Intimidation',
+        variable: false,
+        depends_on: 'race',
+      }],
+      traits: {
+        'Relentless Endurance':
+          'When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can’t use this feature again until you finish a long rest.',
+        'Savage Attacks':
+          'When you score a critical hit with a melee weapon attack, you can roll one of the weapon’s damage dice one additional time and add it to the extra damage of the critical hit.',
+        Darkvision:
+          'Darkvision. Thanks to your orc blood, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can’t discern color in darkness, only shades of gray.'
+      },
+      subraces: []
+    },
     {
       id: 9,
       name: 'Tiefling',
