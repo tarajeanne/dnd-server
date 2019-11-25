@@ -871,7 +871,7 @@ const classStore = [
         desc: '',
         variable: true,
         depends_on: 'class',
-        type: druid,
+        type: 'druid',
         max_level: 0
       }
     ],
