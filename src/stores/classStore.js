@@ -884,7 +884,7 @@ const classStore = [
         options: [
           'animal handling',
           'insight',
-          'medicine,',
+          'medicine',
           'nature',
           'perception',
           'religion',
@@ -899,7 +899,7 @@ const classStore = [
         options: [
           'animal handling',
           'insight',
-          'medicine,',
+          'medicine',
           'nature',
           'perception',
           'religion',
