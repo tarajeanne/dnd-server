@@ -9,7 +9,6 @@ const jsonBodyParser = express.json();
 authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   const { username, password } = req.body;
   console.log(username);
-  console.log(req.app.get('db'));
   morgan((req, res) => [req.body.username, req.body.password].join(' '));
   const loginUser = { username, password };
 
