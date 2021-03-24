@@ -8,6 +8,7 @@ const jsonBodyParser = express.json();
 
 authRouter.post('/login', jsonBodyParser, (req, res, next) => {
   const { username, password } = req.body;
+  console.log(username);
   morgan((req, res) => [req.body.username, req.body.password].join(' '));
   const loginUser = { username, password };
 
@@ -38,6 +39,7 @@ authRouter.post('/login', jsonBodyParser, (req, res, next) => {
           });
 
         const sub = dbUser.username;
+        console.log(sub);
         const payload = { user_id: dbUser.id };
         res.send({
           authToken: AuthService.createJwt(sub, payload)
