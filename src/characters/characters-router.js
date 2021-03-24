@@ -17,7 +17,7 @@ charactersRouter
   .delete(requireAuth, (req, res) => {
     charactersService
       .deleteCharacter(req.app.get('db'), req.params.characterId)
-      .then(() => res.send(201));
+      .then(() => res.sendStatus(201));
   });
 
 charactersRouter
