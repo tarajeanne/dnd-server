@@ -407,7 +407,7 @@ const raceStore = [
     id: 7,
     name: 'Half-Elf',
     desc:
-      ' Half-Elf TraitsYour half-elf character has some qualities in common with elves and some that are unique to half-elves.',
+      'Your half-elf character has some qualities in common with elves and some that are unique to half-elves.',
     asi: [
       {
         name: 'Charisma',
